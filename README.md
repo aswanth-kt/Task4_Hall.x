@@ -34,6 +34,10 @@ A full-stack authentication application built as an internship task using React,
 * CORS
 * Dotenv
 
+## Demo Video
+Watch the project demonstration on YouTube: 
+🔗 [Project Demo](https://youtu.be/4eOh0jGJLJM)
+
 ## Authentication Flow
 
 1. User registers using Signup form.
