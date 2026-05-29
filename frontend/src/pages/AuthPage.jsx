@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { SignupForm } from '../components/authPage/SignupForm'
 import { LoginForm } from '../components/authPage/LoginForm'
 
-const authPage = () => {
+const AuthPage = () => {
   const [tab, setTab] = useState("signup");
   
     return (
@@ -37,4 +37,4 @@ const authPage = () => {
     );
 }
 
-export default authPage
+export default AuthPage
