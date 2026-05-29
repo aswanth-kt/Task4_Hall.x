@@ -93,7 +93,7 @@ export function SignupForm({ onSwitch }) {
             type={showPw ? "text" : "password"}
             value={password}
             onChange={(e) => { setPassword(e.target.value); setFlash({ msg: "", type: "" }); }}
-            placeholder="Min. 8 characters"
+            placeholder="Min. 6 characters"
             className="w-full h-10 px-3 pr-9 rounded-lg border border-gray-200 bg-gray-50 text-sm text-gray-800 outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 transition"
           />
           <button
@@ -112,12 +112,6 @@ export function SignupForm({ onSwitch }) {
       >
         Create account →
       </button>
-
-      <div className="flex items-center gap-2 text-xs text-gray-300">
-        <div className="flex-1 h-px bg-gray-100" />
-        or continue with
-        <div className="flex-1 h-px bg-gray-100" />
-      </div>
 
       <p className="text-xs text-center text-gray-400">
         Already have an account?{" "}

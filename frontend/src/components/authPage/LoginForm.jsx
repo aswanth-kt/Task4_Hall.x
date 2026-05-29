@@ -99,12 +99,6 @@ export function LoginForm({ onSwitch }) {
         Sign in →
       </button>
 
-      <div className="flex items-center gap-2 text-xs text-gray-300">
-        <div className="flex-1 h-px bg-gray-100" />
-        or continue with
-        <div className="flex-1 h-px bg-gray-100" />
-      </div>
-
       <p className="text-xs text-center text-gray-400">
         No account yet?{" "}
         <button onClick={onSwitch} className="text-emerald-600 font-medium hover:underline">

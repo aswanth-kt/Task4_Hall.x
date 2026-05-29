@@ -30,6 +30,14 @@ export const signupUser = async (req, res) => {
       })
     };
 
+    if (password.length < 6) {
+      return res
+      .status(400)
+      .json({
+        message: "Min 6 characters required"
+      })
+    }
+
     const existedUser = await User.findOne({email: email});
 
     if (existedUser) {
