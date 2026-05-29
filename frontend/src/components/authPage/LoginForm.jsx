@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Flash } from "./Flash";
 import { EyeIcon } from "./EyeIcon";
+import axios from "../../api/axios.js"
+import { useNavigate } from "react-router-dom";
 
 export function LoginForm({ onSwitch }) {
   const [email, setEmail] = useState("");
@@ -8,7 +10,9 @@ export function LoginForm({ onSwitch }) {
   const [showPw, setShowPw] = useState(false);
   const [flash, setFlash] = useState({ msg: "", type: "" });
 
-  const handleSubmit = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async () => {
     if (!email.trim() || !password.trim()) {
       setFlash({ msg: "Please fill in all fields.", type: "error" });
       return;
@@ -17,7 +21,31 @@ export function LoginForm({ onSwitch }) {
       setFlash({ msg: "Please enter a valid email address.", type: "error" });
       return;
     }
-    setFlash({ msg: "Signed in successfully!", type: "success" });
+    try {
+      const loginRespose = await axios.post("/api/v1/auth/login", {
+        email,
+        password
+      });
+
+      setFlash({ msg: "Signed in successfully!", type: "success" });
+
+      setEmail("");
+      setPassword("");
+
+      const user = loginRespose?.data?.user;
+
+      console.log("Login response:", loginRespose);
+
+      if (loginRespose.status === 200) {
+        navigate("/profile", {
+          state: {user}
+        })
+      }
+
+    } catch (error) {
+      setFlash({ msg: error?.response?.data?.message || "Login failed", type: "error" });
+      console.error("Login error:", error);
+    }
   };
 
   return (

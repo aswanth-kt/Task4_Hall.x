@@ -2,6 +2,7 @@ import { useState } from "react";
 import { EyeIcon } from "./EyeIcon";
 import { Flash } from "./Flash";
 import axios from "../../api/axios.js";
+import { useNavigate } from "react-router-dom";
 
 export function SignupForm({ onSwitch }) {
   const [name, setName] = useState("");
@@ -9,6 +10,8 @@ export function SignupForm({ onSwitch }) {
   const [password, setPassword] = useState("");
   const [showPw, setShowPw] = useState(false);
   const [flash, setFlash] = useState({ msg: "", type: "" });
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,12 +38,20 @@ export function SignupForm({ onSwitch }) {
       setEmail("");
       setPassword("");
 
-      console.log("signup success:", signupResponse.data)
-    } catch (error) {
-      setFlash({ msg: error?.date?.message || "Signup failed", type: "error" });
-      console.error(error);
-    }
+      console.log("signup success:", signupResponse.data);
 
+      const user = signupResponse?.data?.user;
+
+      if (signupResponse.status === 201) {
+        navigate("/profile", {
+          state: {user}
+        })
+      }
+      
+    } catch (error) {
+      setFlash({ msg: error?.response?.data?.message || "Signup failed", type: "error" });
+      console.error("Signup error:", error);
+    }
   };
 
   return (
